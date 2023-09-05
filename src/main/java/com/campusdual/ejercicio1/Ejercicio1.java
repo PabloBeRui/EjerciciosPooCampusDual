@@ -2,6 +2,6 @@ package com.campusdual.ejercicio1;
 
 public class Ejercicio1 {
     public static void main(String[] args) {
-        System.out.println("ola k ase2");
+        System.out.println("ola k ase3");
     }
 }

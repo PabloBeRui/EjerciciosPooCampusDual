@@ -38,6 +38,7 @@ public class Menu {
     public static void main(String[] args) {
 
         foodMenu();
+        addFood();
     }
 
     private static void foodMenu() {
@@ -103,9 +104,36 @@ public class Menu {
 
                 actualDiet = new Diet(women, age, height, weight);
 
-
+}
                 //!AHORA VAMOS CON EL MENU DE AGREGAR ALIMENTO
-    
+              /*  -3. Agregar alimento: agrega un alimento a la dieta actual y añade ese alimento a la lista de alimentos disponible
+                    -a. Nuevo alimento
+                    -b. Alimento existente*/
+                private static void addfood() {
+                System.out.println("Agregar alimento a la dieta");
+                System.out.println("a. Nuevo alimento");
+                System.out.println("b. Alimento existente");
+                String menu = scanner.nextLine();
+                if (menu.equalsIgnoreCase("a")) {
+                    System.out.println("Añade el nombre del alimento");
+                    String foodName = scanner.nextLine();//!Espabila, nexInt es para enteros!!!!
+                    System.out.println("Añade Carbohidratos");
+                    Integer setCarbos = scanner.nextInt();
+                    System.out.println("Añade Grasas");
+                    Integer setFats = scanner.nextInt();
+                    System.out.println("Añade Proteínas");
+                    Integer setProteins = scanner.nextInt();
+
+                    Food foodname = new Food(setCarbos, setFats, setProteins, foodName);
+
+                    foodList.add(foodname);
+
+                    System.out.println("Alimento añadido correctamente");
+                }
+
+                System.out.println(foodList);
+
+            }
         }
     }
 }

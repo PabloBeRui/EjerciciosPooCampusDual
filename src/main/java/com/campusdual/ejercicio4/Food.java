@@ -18,7 +18,7 @@ public class Food {
         this.carbos = carbos;
         this.fats = fats;
         this.proteins = proteins;
-        this.foodName = null;
+        this.foodName = foodName;
     }
 
     //getters

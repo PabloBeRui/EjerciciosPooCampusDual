@@ -4,47 +4,22 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Scanner;
 
-import org.w3c.dom.html.HTMLTableRowElement;
-
-
-/*
-* --Escribe un programa que utilice la clase Dieta y despliegue un menú donde puedas añadir alimentos. El menú tendrá las siguientes opciones.
-	-1. Crear/reiniciar dieta: crea o remplaza la dieta inicial
-		-a. Sin limite
-		-b. Por calorías
-		-c. Por macronutrientes
-		-d. Por datos personales
-	-2. Mostrar información: muestra calorías y macronutrientes de la dieta
-	-3. Agregar alimento: agrega un alimento a la dieta actual y añade ese alimento a la lista de alimentos disponible
-		-a. Nuevo alimento
-		-b. Alimento existente
-	-4. Salir
-*
- */
-
 public class Menu {
+
     private static Diet actualDiet;
 
-
-    //alimentos predefinidos
-//    private static Food food = new Food();
     private static Food lechuga = new Food(1, 0, 0, "Leituga");
     private static Food callos = new Food(800, 20, 30, "callos");
 
-
     private static ArrayList<Food> foodList = new ArrayList<>(Arrays.asList(lechuga, callos));
 
-
     public static void main(String[] args) {
-
-        foodMenu();
+//        foodMenu();
         addFood();
     }
 
     private static void foodMenu() {
         Scanner scanner = new Scanner(System.in);
-
-        //! MENU INICIAL
 
         System.out.println("Crear/reiniciar dieta: crea o remplaza la dieta inicial");
         System.out.println("1-Sin limite");
@@ -55,17 +30,17 @@ public class Menu {
         Integer menuNum = scanner.nextInt();
 
         switch (menuNum) {
-            case (1):
+            case 1:
                 System.out.println("Sin limite");
                 actualDiet = new Diet();
                 break;
-            case (2):
+            case 2:
                 System.out.println("Por calorías");
                 System.out.println("Fanegas, introduce calorías");
                 Integer maxCalories = scanner.nextInt();
                 actualDiet = new Diet(maxCalories);
                 break;
-            case (3):
+            case 3:
                 System.out.println("Por macronutrientes");
                 System.out.println("Fanegas, introduce Carbohidratos");
                 Integer maxCarbs = scanner.nextInt();
@@ -75,15 +50,14 @@ public class Menu {
                 Integer maxProtein = scanner.nextInt();
                 actualDiet = new Diet(maxFats, maxCarbs, maxProtein);
                 break;
-            case (4):
-
+            case 4:
                 boolean women = false;
-
                 System.out.println("Por datos personales");
+                scanner.nextLine(); // Consumir el newline
                 String gender;
                 do {
-                    gender = scanner.nextLine();
                     System.out.println("¿Eres hombre o mujer?");
+                    gender = scanner.nextLine();
 
                     if (gender.equalsIgnoreCase("mujer")) {
                         women = true;
@@ -103,37 +77,66 @@ public class Menu {
                 int weight = scanner.nextInt();
 
                 actualDiet = new Diet(women, age, height, weight);
-
-}
-                //!AHORA VAMOS CON EL MENU DE AGREGAR ALIMENTO
-              /*  -3. Agregar alimento: agrega un alimento a la dieta actual y añade ese alimento a la lista de alimentos disponible
-                    -a. Nuevo alimento
-                    -b. Alimento existente*/
-                private static void addfood() {
-                System.out.println("Agregar alimento a la dieta");
-                System.out.println("a. Nuevo alimento");
-                System.out.println("b. Alimento existente");
-                String menu = scanner.nextLine();
-                if (menu.equalsIgnoreCase("a")) {
-                    System.out.println("Añade el nombre del alimento");
-                    String foodName = scanner.nextLine();//!Espabila, nexInt es para enteros!!!!
-                    System.out.println("Añade Carbohidratos");
-                    Integer setCarbos = scanner.nextInt();
-                    System.out.println("Añade Grasas");
-                    Integer setFats = scanner.nextInt();
-                    System.out.println("Añade Proteínas");
-                    Integer setProteins = scanner.nextInt();
-
-                    Food foodname = new Food(setCarbos, setFats, setProteins, foodName);
-
-                    foodList.add(foodname);
-
-                    System.out.println("Alimento añadido correctamente");
-                }
-
-                System.out.println(foodList);
-
-            }
+                break;
+            default:
+                System.out.println("Opción no válida");
         }
+    }
+
+    //!  MENU 3
+    private static void addFood() {
+        Scanner scanner = new Scanner(System.in);
+
+        System.out.println("Agregar alimento a la dieta");
+        System.out.println("a. Nuevo alimento");
+        System.out.println("b. Alimento existente");
+        String menu = scanner.nextLine();
+        if (menu.equalsIgnoreCase("a")) {
+            System.out.println("Añade el nombre del alimento");
+            String foodName = scanner.nextLine();
+            System.out.println("Añade Carbohidratos");
+            Integer setCarbos = scanner.nextInt();
+            System.out.println("Añade Grasas");
+            Integer setFats = scanner.nextInt();
+            System.out.println("Añade Proteínas");
+            Integer setProteins = scanner.nextInt();
+
+            Food foodname = new Food(setCarbos, setFats, setProteins, foodName);
+
+            foodList.add(foodname);
+
+            for (Food food : foodList) {
+                System.out.println(food.getFoodName());
+            }
+
+
+// ! añadir más?
+            String anotherFood;
+            do {
+                scanner.nextLine();
+
+                System.out.println("Deseas añadir otro Alimento?");
+
+                anotherFood = scanner.nextLine();
+
+
+                if (anotherFood.equalsIgnoreCase("si")) {
+                    addFood();
+                } else if (anotherFood.equalsIgnoreCase("no")) {
+
+                    break;
+                } else {
+
+                    System.out.println("Escribe bien, por favor");
+                }
+            } while (!anotherFood.equalsIgnoreCase("si") && !anotherFood.equalsIgnoreCase("no"));
+        }
+
+        // System.out.println(foodList);
+
+        for (Food food : foodList) {
+            System.out.println(food.getFoodName());
+        }
+
     }
 }

@@ -14,7 +14,7 @@ public class Food {
         this.foodName = null;
     }
 
-    public Food(Integer carbos, Integer fats, Integer proteins) {
+    public Food(Integer carbos, Integer fats, Integer proteins, String foodName) {
         this.carbos = carbos;
         this.fats = fats;
         this.proteins = proteins;

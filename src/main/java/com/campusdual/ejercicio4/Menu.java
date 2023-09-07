@@ -1,6 +1,7 @@
 package com.campusdual.ejercicio4;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Scanner;
 
 import org.w3c.dom.html.HTMLTableRowElement;
@@ -24,8 +25,14 @@ import org.w3c.dom.html.HTMLTableRowElement;
 public class Menu {
     private static Diet actualDiet;
 
-    private static Food food = new Food();
-    private static ArrayList foodList = new ArrayList<>();
+
+    //alimentos predefinidos
+//    private static Food food = new Food();
+    private static Food lechuga = new Food(1, 0, 0, "Leituga");
+    private static Food callos = new Food(800, 20, 30, "callos");
+
+
+    private static ArrayList<Food> foodList = new ArrayList<>(Arrays.asList(lechuga, callos));
 
 
     public static void main(String[] args) {
@@ -35,6 +42,8 @@ public class Menu {
 
     private static void foodMenu() {
         Scanner scanner = new Scanner(System.in);
+
+        //! MENU INICIAL
 
         System.out.println("Crear/reiniciar dieta: crea o remplaza la dieta inicial");
         System.out.println("1-Sin limite");
@@ -95,15 +104,8 @@ public class Menu {
                 actualDiet = new Diet(women, age, height, weight);
 
 
-       /* System.out.println("Añade el nombre del alimento");
-        food.setFoodName(scanner.nextLine());//!Espabila, nexInt es para enteros!!!!
-        System.out.println("Añade Carbohidratos");
-        food.setCarbos(scanner.nextInt());
-        System.out.println("Añade Grasas");
-        food.setFats(scanner.nextInt());
-        System.out.println("Añade Proteínas");
-        food.setProteins(scanner.nextInt());*/
-
+                //!AHORA VAMOS CON EL MENU DE AGREGAR ALIMENTO
+    
         }
     }
 }

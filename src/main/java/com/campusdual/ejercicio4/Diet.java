@@ -160,13 +160,13 @@ public class Diet {
         this.weight = weight;
     }
 
-    //METODOS (VENGA QUE YA VAS MEJOR QUE AYER )
+    //METODOS
 
     public Integer basalMetabolism(Boolean women, Integer age, Integer height, Integer weight) {
 
         return women ? (weight * 10) + (int) (height * 6.25) - (age * 5) - 161 : (weight * 10) + (int) (height * 6.25) - (age * 5) + 5;
 
-        
+
     }
 
 

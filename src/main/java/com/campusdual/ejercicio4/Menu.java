@@ -22,6 +22,7 @@ import java.util.Scanner;
 
 
 public class Menu {
+    private static final Scanner scanner = new Scanner(System.in);
 
     private static Diet actualDiet;
 
@@ -31,18 +32,18 @@ public class Menu {
     private static ArrayList<Food> foodList = new ArrayList<>(Arrays.asList(lechuga, callos));
     private static ArrayList<Food> foodToDietList = new ArrayList<>();
 
-//    private static ArrayList<Diet> dietList = new ArrayList<>();
+    private static ArrayList<Diet> dietList = new ArrayList<>();
 
     private static String anotherFood;  //variable para menu de añador más alimentos
 
     public static void main(String[] args) {
 //        foodMenu();
-//        addFood();
+        //  addFood();
         menuInit();
     }
 
     private static void foodMenu() {
-        Scanner scanner = new Scanner(System.in);
+
 
         System.out.println("Crear/reiniciar dieta: crea o remplaza la dieta inicial");
         System.out.println("1-Sin limite");
@@ -108,7 +109,7 @@ public class Menu {
 
     //!  MENU 3
     private static void addFood() {
-        Scanner scanner = new Scanner(System.in);
+
 
         System.out.println("Agregar alimento a la dieta");
         System.out.println("a. Nuevo alimento");
@@ -207,7 +208,7 @@ public class Menu {
     //! VAMOS A POR EL MENU PRINCIPAL
 
     public static void menuInit() {
-        Scanner scanner = new Scanner(System.in);
+
         System.out.println("\n");
         System.out.println("@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@");
         System.out.println("\n");
@@ -223,10 +224,12 @@ public class Menu {
         switch (chooseNum) {
             case (1):
                 foodMenu();
+                break;
             case (2):
                 break;
             case (3):
                 addFood();
+                break;
             case (4):
                 System.out.println("Bye Bye!");
             default:

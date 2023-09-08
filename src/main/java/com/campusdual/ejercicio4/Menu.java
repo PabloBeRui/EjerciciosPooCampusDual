@@ -4,6 +4,22 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Scanner;
 
+/*
+* --Escribe un programa que utilice la clase Dieta y despliegue un menú donde puedas añadir alimentos. El menú tendrá las siguientes opciones.
+	-1. Crear/reiniciar dieta: crea o remplaza la dieta inicial
+		-a. Sin limite
+		-b. Por calorías
+		-c. Por macronutrientes
+		-d. Por datos personales
+	-2. Mostrar información: muestra calorías y macronutrientes de la dieta
+	-3. Agregar alimento: agrega un alimento a la dieta actual y añade ese alimento a la lista de alimentos disponible
+		-a. Nuevo alimento
+		-b. Alimento existente
+	-4. Salir
+*
+ */
+
+
 public class Menu {
 
     private static Diet actualDiet;
@@ -12,6 +28,11 @@ public class Menu {
     private static Food callos = new Food(800, 20, 30, "callos");
 
     private static ArrayList<Food> foodList = new ArrayList<>(Arrays.asList(lechuga, callos));
+    private static ArrayList<Food> foodToDietList = new ArrayList<>();
+
+//    private static ArrayList<Diet> dietList = new ArrayList<>();
+
+    private static String anotherFood;  //variable para menu de añador más alimentos
 
     public static void main(String[] args) {
 //        foodMenu();
@@ -111,7 +132,7 @@ public class Menu {
 
 
 // ! añadir más?
-            String anotherFood;
+
             do {
                 scanner.nextLine();
 
@@ -138,5 +159,50 @@ public class Menu {
             System.out.println(food.getFoodName());
         }
 
+        if (menu.equalsIgnoreCase("b")) {
+            System.out.println("Elige un alimento entre de los siguientes:");
+            System.out.println("@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@");
+            for (Food food : foodList) {
+                System.out.println(food.getFoodName());
+            }
+            System.out.println("@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@");
+            String selectedFood = scanner.nextLine();
+            for (Food food : foodList) {
+
+                if (food.getFoodName().equalsIgnoreCase(selectedFood)) {
+
+                    System.out.println("Has añadido " + selectedFood + " correctamente");
+                    foodToDietList.add(food);
+                    System.out.println(food.getFoodName());
+                }
+//                 else {
+//                    System.out.println("Alimento no encontrado");
+            }
+
+
+            do {
+//                scanner.nextLine();
+
+                System.out.println("Deseas añadir otro Alimento?");
+
+                anotherFood = scanner.nextLine();
+
+
+                if (anotherFood.equalsIgnoreCase("si")) {
+                    addFood();
+                } else if (anotherFood.equalsIgnoreCase("no")) {
+
+                    break;
+                } else {
+
+                    System.out.println("Escribe bien, por favor");
+                }
+            } while (!anotherFood.equalsIgnoreCase("si") && !anotherFood.equalsIgnoreCase("no"));
+        }
+
+
     }
 }
+
+
+

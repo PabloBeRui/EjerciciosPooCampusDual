@@ -278,7 +278,14 @@ public class Menu {
                 addFood();
                 break;
             case (4):
-                System.out.println("Bye Bye!");
+                System.out.println("  _  ");
+                System.out.println(" ('v')");
+                System.out.println("-=-<");
+                System.out.println("(\")_\"");
+                System.out.println(" Bye Bye!");
+
+
+                break;
             default:
                 System.out.println("\u001B[34m-------------------------------------------------");
                 System.out.println("\u001B[34mPor favor, escribe un número válido");

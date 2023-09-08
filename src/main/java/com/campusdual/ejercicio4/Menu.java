@@ -1,6 +1,5 @@
 package com.campusdual.ejercicio4;
 
-import java.sql.SQLOutput;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Scanner;
@@ -45,11 +44,16 @@ public class Menu {
     private static void foodMenu() {
 
 
-        System.out.println("Crear/reiniciar dieta: crea o remplaza la dieta inicial");
+        System.out.println("\u001B[34m╔══════════════════════════════════════════════════╗");
+        System.out.println("\u001B[34m║    Crear/reiniciar dieta: crea o remplaza la     ║");
+        System.out.println("\u001B[34m║                dieta inicial                     ║");
+        System.out.println("\u001B[34m╚══════════════════════════════════════════════════╝");
+        System.out.println("\n");
         System.out.println("1-Sin limite");
         System.out.println("2-Por calorías");
         System.out.println("3-Por macronutrientes");
         System.out.println("4-Por datos personales");
+        System.out.println("5- Volver al Menú principal");
 
         Integer menuNum = scanner.nextInt();
 
@@ -57,9 +61,9 @@ public class Menu {
             case 1:
                 System.out.println("Sin limite");
                 actualDiet = new Diet();
-                System.out.println("#####################################################");
-                System.out.println("Elegido: Sin limites");
-                System.out.println("#####################################################");
+                System.out.println("\u001B[32m---------------------------------------------------");
+                System.out.println("\u001B[32m|               Elegido: Sin límites              |");
+                System.out.println("\u001B[32m---------------------------------------------------");
                 System.out.println("\n");
                 menuInit();
                 break;
@@ -69,9 +73,10 @@ public class Menu {
                 System.out.println("\n");
                 Integer maxCalories = scanner.nextInt();
                 actualDiet = new Diet(maxCalories);
-                System.out.println("#####################################################");
-                System.out.println("Elegido: limite de calorias: " + maxCalories);
-                System.out.println("#####################################################");
+                System.out.println("\u001B[34m-----------------------------------------------------");
+                System.out.println("\u001B[34m* Elegido: límite de calorías: " + maxCalories);
+                System.out.println("\u001B[34m-----------------------------------------------------");
+
                 System.out.println("\n");
                 menuInit();
                 break;
@@ -85,9 +90,13 @@ public class Menu {
                 Integer maxProtein = scanner.nextInt();
                 System.out.println("\n");
                 actualDiet = new Diet(maxFats, maxCarbs, maxProtein);
-                System.out.println("#####################################################");
-                System.out.println("Elegido: Por macronutirentes: " + "Máximo Carbohidratos: " + maxCarbs + "\n" + "Máximo Grasas: " + maxFats + "\n" + "Máximo proteinas: " + maxProtein + "\n");
-                System.out.println("#####################################################");
+                System.out.println("\u001B[34m-----------------------------------------------------");
+                System.out.println("\u001B[34mElegido: Por macronutrientes: " +
+                        "\nMáximo Carbohidratos: " + maxCarbs +
+                        "\nMáximo Grasas: " + maxFats +
+                        "\nMáximo Proteínas: " + maxProtein);
+                System.out.println("\u001B[34m-----------------------------------------------------");
+
                 System.out.println("\n");
                 menuInit();
                 break;
@@ -119,10 +128,17 @@ public class Menu {
 
                 actualDiet = new Diet(women, age, height, weight);
 
-                System.out.println("#####################################################");
-                System.out.println("Elegido: Por Datos personales: " + "Edad: " + age + "\n" + "Altura en cm: " + height + "\n" + "Peso en Kg: " + weight + "\n");
-                System.out.println("#####################################################");
+                System.out.println("\u001B[34m-----------------------------------------------------");
+                System.out.println("\u001B[34mElegido: Por Datos personales: " +
+                        "\nEdad: " + age +
+                        "\nAltura en cm: " + height +
+                        "\nPeso en Kg: " + weight);
+                System.out.println("\u001B[34m-----------------------------------------------------");
+
                 System.out.println("\n");
+                break;
+            case (5):
+                menuInit();
                 break;
             default:
                 System.out.println("Opción no válida");
@@ -132,20 +148,28 @@ public class Menu {
     //!  MENU 3
     private static void addFood() {
 
+        System.out.println("\u001B[34m╔══════════════════════════════════════════════════╗");
+        System.out.println("\u001B[34m║        Agregar alimento a la dieta               ║");
+        System.out.println("\u001B[34m╚══════════════════════════════════════════════════╝");
 
-        System.out.println("Agregar alimento a la dieta");
+        System.out.println("\n");
         System.out.println("a. Nuevo alimento");
         System.out.println("b. Alimento existente");
+        System.out.println("c. Volver al Menu principal");
         String menu = scanner.nextLine();
+
         if (menu.equalsIgnoreCase("a")) {
             System.out.println("Añade el nombre del alimento");
             String foodName = scanner.nextLine();
             System.out.println("Añade Carbohidratos");
             Integer setCarbos = scanner.nextInt();
+            scanner.nextLine();
             System.out.println("Añade Grasas");
             Integer setFats = scanner.nextInt();
+            scanner.nextLine();
             System.out.println("Añade Proteínas");
             Integer setProteins = scanner.nextInt();
+            scanner.nextLine();
 
             Food foodname = new Food(setCarbos, setFats, setProteins, foodName);
 
@@ -155,29 +179,20 @@ public class Menu {
                 System.out.println(food.getFoodName());
             }
 
-
-// ! añadir más?
-
+            // Eliminado scanner.nextLine(); de aquí
             do {
-                scanner.nextLine();
-
                 System.out.println("Deseas añadir otro Alimento?");
-
                 anotherFood = scanner.nextLine();
-
 
                 if (anotherFood.equalsIgnoreCase("si")) {
                     addFood();
                 } else if (anotherFood.equalsIgnoreCase("no")) {
-
                     break;
                 } else {
-
                     System.out.println("Escribe bien, por favor");
                 }
             } while (!anotherFood.equalsIgnoreCase("si") && !anotherFood.equalsIgnoreCase("no"));
         }
-
         // System.out.println(foodList);
 
         for (Food food : foodList) {
@@ -185,12 +200,13 @@ public class Menu {
         }
 
         if (menu.equalsIgnoreCase("b")) {
-            System.out.println("Elige un alimento entre de los siguientes:");
-            System.out.println("@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@");
+            System.out.println("\u001B[34m╔════════════════════════════════════════════════════╗");
+            System.out.println("\u001B[34m║ Elige un alimento entre los siguientes:            ║");
+            System.out.println("\u001B[34m╚════════════════════════════════════════════════════╝");
             for (Food food : foodList) {
                 System.out.println(food.getFoodName());
             }
-            System.out.println("@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@");
+            System.out.println("\n");
             String selectedFood = scanner.nextLine();
             for (Food food : foodList) {
 
@@ -200,39 +216,47 @@ public class Menu {
                     foodToDietList.add(food);
                     System.out.println(food.getFoodName());
                 }
-//                 else {
-//                    System.out.println("Alimento no encontrado");
             }
 
-
             do {
-//                scanner.nextLine();
-
                 System.out.println("Deseas añadir otro Alimento?");
-
                 anotherFood = scanner.nextLine();
-
 
                 if (anotherFood.equalsIgnoreCase("si")) {
                     addFood();
                 } else if (anotherFood.equalsIgnoreCase("no")) {
-
                     break;
                 } else {
-
                     System.out.println("Escribe bien, por favor");
                 }
             } while (!anotherFood.equalsIgnoreCase("si") && !anotherFood.equalsIgnoreCase("no"));
         }
+        if (menu.equalsIgnoreCase("c")) {
+            menuInit();
+        } else {
+            System.out.println("\n");
+            System.out.println("*************************************************");
+            System.out.println("* Por favor, elige una opción válida: a, b, o c *");
+            System.out.println("*************************************************");
+            System.out.println("\n");
+            addFood();
 
 
+        }
     }
+
+
     //! VAMOS A POR EL MENU PRINCIPAL
 
     public static void menuInit() {
 
         System.out.println("\n");
-        System.out.println("@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@");
+        System.out.println("\u001B[38;2;255;165;0m╔══════════════════════════════════════════════════════════════════════╗");
+        System.out.println("\u001B[38;2;255;165;0m║                           Menú Principal                             ║");
+        System.out.println("\u001B[38;2;255;165;0m╚══════════════════════════════════════════════════════════════════════╝");
+
+        ;
+
         System.out.println("\n");
         System.out.println("Menu Inicial");
         System.out.println("\n");
@@ -243,6 +267,7 @@ public class Menu {
         System.out.println("4. Salir");
         System.out.println("\n");
         Integer chooseNum = scanner.nextInt();
+        scanner.nextLine();
         switch (chooseNum) {
             case (1):
                 foodMenu();
@@ -255,9 +280,9 @@ public class Menu {
             case (4):
                 System.out.println("Bye Bye!");
             default:
-                System.out.println("@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@");
-                System.out.println("Por favor, escribe un número válido");
-                System.out.println("@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@");
+                System.out.println("\u001B[34m-------------------------------------------------");
+                System.out.println("\u001B[34mPor favor, escribe un número válido");
+                System.out.println("\u001B[34m-------------------------------------------------");
                 System.out.println("\n");
                 menuInit();
         }

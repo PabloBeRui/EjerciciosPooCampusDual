@@ -1,5 +1,6 @@
 package com.campusdual.ejercicio4;
 
+import java.sql.SQLOutput;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Scanner;
@@ -36,7 +37,8 @@ public class Menu {
 
     public static void main(String[] args) {
 //        foodMenu();
-        addFood();
+//        addFood();
+        menuInit();
     }
 
     private static void foodMenu() {
@@ -198,6 +200,41 @@ public class Menu {
                     System.out.println("Escribe bien, por favor");
                 }
             } while (!anotherFood.equalsIgnoreCase("si") && !anotherFood.equalsIgnoreCase("no"));
+        }
+
+
+    }
+    //! VAMOS A POR EL MENU PRINCIPAL
+
+    public static void menuInit() {
+        Scanner scanner = new Scanner(System.in);
+        System.out.println("\n");
+        System.out.println("@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@");
+        System.out.println("\n");
+        System.out.println("Menu Inicial");
+        System.out.println("\n");
+        System.out.println("Elige una opción del 1 al 4, por favor");
+        System.out.println("1. Crear/reiniciar dieta: crea o remplaza la dieta inicial");
+        System.out.println("2. Mostrar información: muestra calorías y macronutrientes de la dieta");
+        System.out.println("3. Agregar alimento: agrega un alimento a la dieta actual y añade ese alimento a la lista de alimentos disponible");
+        System.out.println("4. Salir");
+        System.out.println("\n");
+        Integer chooseNum = scanner.nextInt();
+        switch (chooseNum) {
+            case (1):
+                foodMenu();
+            case (2):
+                break;
+            case (3):
+                addFood();
+            case (4):
+                System.out.println("Bye Bye!");
+            default:
+                System.out.println("@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@");
+                System.out.println("Por favor, escribe un número válido");
+                System.out.println("@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@");
+                System.out.println("\n");
+                menuInit();
         }
 
 

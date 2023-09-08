@@ -57,22 +57,39 @@ public class Menu {
             case 1:
                 System.out.println("Sin limite");
                 actualDiet = new Diet();
+                System.out.println("#####################################################");
+                System.out.println("Elegido: Sin limites");
+                System.out.println("#####################################################");
+                System.out.println("\n");
+                menuInit();
                 break;
             case 2:
                 System.out.println("Por calorías");
-                System.out.println("Fanegas, introduce calorías");
+                System.out.println("Introduce calorías");
+                System.out.println("\n");
                 Integer maxCalories = scanner.nextInt();
                 actualDiet = new Diet(maxCalories);
+                System.out.println("#####################################################");
+                System.out.println("Elegido: limite de calorias: " + maxCalories);
+                System.out.println("#####################################################");
+                System.out.println("\n");
+                menuInit();
                 break;
             case 3:
                 System.out.println("Por macronutrientes");
-                System.out.println("Fanegas, introduce Carbohidratos");
+                System.out.println("Introduce Carbohidratos");
                 Integer maxCarbs = scanner.nextInt();
-                System.out.println("Fanegas, introduce Grasas");
+                System.out.println("Introduce Grasas");
                 Integer maxFats = scanner.nextInt();
-                System.out.println("Fanegas, introduce Proteínas");
+                System.out.println("Introduce Proteínas");
                 Integer maxProtein = scanner.nextInt();
+                System.out.println("\n");
                 actualDiet = new Diet(maxFats, maxCarbs, maxProtein);
+                System.out.println("#####################################################");
+                System.out.println("Elegido: Por macronutirentes: " + "Máximo Carbohidratos: " + maxCarbs + "\n" + "Máximo Grasas: " + maxFats + "\n" + "Máximo proteinas: " + maxProtein + "\n");
+                System.out.println("#####################################################");
+                System.out.println("\n");
+                menuInit();
                 break;
             case 4:
                 boolean women = false;
@@ -90,17 +107,22 @@ public class Menu {
                         women = false;
                         break;
                     } else {
-                        System.out.println("Escribe bien, por favor");
+                        System.out.println("Por favor, introduce hombre o mujer");
                     }
                 } while (!gender.equalsIgnoreCase("mujer") && !gender.equalsIgnoreCase("hombre"));
                 System.out.println("Cuantos años tienes?");
                 int age = scanner.nextInt();
                 System.out.println("Altura en cm?");
                 int height = scanner.nextInt();
-                System.out.println("¿Cuántos Kg pesas (sin trampas)");
+                System.out.println("¿Cuántos Kg pesas");
                 int weight = scanner.nextInt();
 
                 actualDiet = new Diet(women, age, height, weight);
+
+                System.out.println("#####################################################");
+                System.out.println("Elegido: Por Datos personales: " + "Edad: " + age + "\n" + "Altura en cm: " + height + "\n" + "Peso en Kg: " + weight + "\n");
+                System.out.println("#####################################################");
+                System.out.println("\n");
                 break;
             default:
                 System.out.println("Opción no válida");

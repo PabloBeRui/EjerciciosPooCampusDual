@@ -236,8 +236,9 @@ public class Menu {
         } else {
             System.out.println("\n");
             System.out.println("*************************************************");
-            System.out.println("* Por favor, elige una opción válida: a, b, o c *");
-            System.out.println("*************************************************");
+            System.out.println("* Por favor, escoge una opción válida: a, b, o c*");
+            System.out.println("************************************************" +
+                    " *");
             System.out.println("\n");
             addFood();
 

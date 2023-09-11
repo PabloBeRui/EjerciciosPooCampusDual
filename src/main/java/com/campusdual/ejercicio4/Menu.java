@@ -29,9 +29,7 @@ public class Menu {
     private static Food callos = new Food(800, 20, 30, "callos");
 
     private static ArrayList<Food> foodList = new ArrayList<>(Arrays.asList(lechuga, callos));
-    private static ArrayList<Food> foodToDietList = new ArrayList<>();
 
-    private static ArrayList<Diet> dietList = new ArrayList<>();
 
     private static String anotherFood;  //variable para menu de añador más alimentos
 
@@ -161,25 +159,36 @@ public class Menu {
         if (menu.equalsIgnoreCase("a")) {
             System.out.println("Añade el nombre del alimento");
             String foodName = scanner.nextLine();
-            System.out.println("Añade Carbohidratos");
+            System.out.println("Añade Carbohidratos por 100 gramos");
             Integer setCarbos = scanner.nextInt();
             scanner.nextLine();
-            System.out.println("Añade Grasas");
+            System.out.println("Añade Grasas por 100 gramos");
             Integer setFats = scanner.nextInt();
             scanner.nextLine();
-            System.out.println("Añade Proteínas");
+            System.out.println("Añade Proteínas por 100 gramos");
             Integer setProteins = scanner.nextInt();
             scanner.nextLine();
+            System.out.println("¿Cuantos gramos?");
+            Integer setWeight = scanner.nextInt();
+            scanner.nextLine();
+//! dame gramos
+            Food foodInfo = new Food(setCarbos, setFats, setProteins, foodName);
 
-            Food foodname = new Food(setCarbos, setFats, setProteins, foodName);
 
-            foodList.add(foodname);
+//! Añadi el un método estático en el que ya hace el add
+            Diet.addFoodToDietList(foodName);
+            Diet.addWeightToWeight(setWeight);
+            Diet.printDietDetails();
+            foodList.add(foodInfo);
+
 
             for (Food food : foodList) {
                 System.out.println(food.getFoodName());
             }
 
             // Eliminado scanner.nextLine(); de aquí
+
+
             do {
                 System.out.println("Deseas añadir otro Alimento?");
                 anotherFood = scanner.nextLine();
@@ -208,16 +217,19 @@ public class Menu {
             }
             System.out.println("\n");
             String selectedFood = scanner.nextLine();
+            Boolean finded = false;
             for (Food food : foodList) {
 
                 if (food.getFoodName().equalsIgnoreCase(selectedFood)) {
-
+                    finded = true;
                     System.out.println("Has añadido " + selectedFood + " correctamente");
-                    foodToDietList.add(food);
+//                    foodToDietList.add(food);
                     System.out.println(food.getFoodName());
                 }
             }
-
+            if (!finded) {
+                System.out.println("Alimento no encontrado");
+            }
             do {
                 System.out.println("Deseas añadir otro Alimento?");
                 anotherFood = scanner.nextLine();
@@ -297,6 +309,9 @@ public class Menu {
 
 
     }
+    //!MENU 2
+
+
 }
 
 

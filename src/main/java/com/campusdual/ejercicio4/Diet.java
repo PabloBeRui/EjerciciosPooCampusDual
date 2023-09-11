@@ -1,5 +1,7 @@
 package com.campusdual.ejercicio4;
 
+import java.util.ArrayList;
+
 /*
 * Escribe una clase dieta, que teniendo en cuenta una serie de alimentos, vaya sumando cantidades en gramos y calcule cuentas calorías, carbohidratos, proteinas y grasas genera la ingesta
 La clase dieta tiene que tener las siguientes funcionalidades:
@@ -35,6 +37,10 @@ public class Diet {
     private Integer age;
     private Integer height;
     private Integer weight;
+
+    private static ArrayList<String> foodToDietList = new ArrayList<>();
+
+    private static ArrayList<Integer> foodToDietWeight = new ArrayList<>();
 
 
     //Constructores
@@ -160,6 +166,7 @@ public class Diet {
         this.weight = weight;
     }
 
+
     //METODOS
 
     public Integer basalMetabolism(Boolean women, Integer age, Integer height, Integer weight) {
@@ -169,5 +176,36 @@ public class Diet {
 
     }
 
+    //!  Añado a los arraylist el alimento y el peso  a cada uno
+    public static void addFoodToDietList(String food) {
+        foodToDietList.add(food);
+    }
 
+    public static void addWeightToWeight(Integer setWeight) {
+        foodToDietWeight.add(setWeight);
+    }
+//! hago un método para leer los 2 arrays
+
+    public static void printDietDetails() {
+
+        System.out.println("\u001B[32m---------------------------------------------------");
+        System.out.println("\u001B[32m|           Elementos añadido a Dieta             |");
+        System.out.println("\u001B[32m---------------------------------------------------");
+        System.out.println("\n");
+        
+        System.out.println("Lista de alimentos:");
+        for (String food : foodToDietList) {
+            System.out.println(food);
+        }
+
+        System.out.println("Lista de pesos:");
+        for (Integer weight : foodToDietWeight) {
+            System.out.println(weight);
+        }
+    }
+// Metodo para añadir food y sus propiedades y el peso
+
+    /*public static void addPropertiesToDietProperties(Food foodInfo, Integer setWeight) {
+    }
+*/
 }

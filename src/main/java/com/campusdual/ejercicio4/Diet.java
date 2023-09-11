@@ -38,7 +38,7 @@ public class Diet {
     private Integer height;
     private Integer weight;
 
-    private static ArrayList<String> foodToDietList = new ArrayList<>();
+    private static ArrayList<Food> foodToDietList = new ArrayList<>();
 
     private static ArrayList<Integer> foodToDietWeight = new ArrayList<>();
 
@@ -177,7 +177,7 @@ public class Diet {
     }
 
     //!  Añado a los arraylist el alimento y el peso  a cada uno
-    public static void addFoodToDietList(String food) {
+    public static void addFoodToDietList(Food food) {
         foodToDietList.add(food);
     }
 
@@ -192,17 +192,13 @@ public class Diet {
         System.out.println("\u001B[32m|           Elementos añadido a Dieta             |");
         System.out.println("\u001B[32m---------------------------------------------------");
         System.out.println("\n");
-        
-        System.out.println("Lista de alimentos:");
-        for (String food : foodToDietList) {
-            System.out.println(food);
-        }
 
-        System.out.println("Lista de pesos:");
-        for (Integer weight : foodToDietWeight) {
-            System.out.println(weight);
+        System.out.println("Lista de alimentos:");
+        for (int i = 0; i < foodToDietList.size(); i++) {
+            System.out.println(foodToDietList.get(i) + " - Peso: " + foodToDietWeight.get(i) + " gramos");
         }
     }
+
 // Metodo para añadir food y sus propiedades y el peso
 
     /*public static void addPropertiesToDietProperties(Food foodInfo, Integer setWeight) {

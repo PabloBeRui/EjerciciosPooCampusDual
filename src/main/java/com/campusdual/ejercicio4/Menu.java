@@ -176,15 +176,15 @@ public class Menu {
 
 
 //! Añadi el un método estático en el que ya hace el add
-            Diet.addFoodToDietList(foodName);
+            Diet.addFoodToDietList(foodInfo);
             Diet.addWeightToWeight(setWeight);
             Diet.printDietDetails();
             foodList.add(foodInfo);
 
-
-            for (Food food : foodList) {
+//!Alimentos añadidos a food
+           /* for (Food food : foodList) {
                 System.out.println(food.getFoodName());
-            }
+            }*/
 
             // Eliminado scanner.nextLine(); de aquí
 

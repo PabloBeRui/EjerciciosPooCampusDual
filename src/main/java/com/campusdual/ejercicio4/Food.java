@@ -63,5 +63,20 @@ public class Food {
     public void setFoodName(String foodName) {
         this.foodName = foodName;
     }
+
+
+    //Método para poder ver detalles del alimento
+
+    @Override
+    public String toString() {
+        return foodName + "-->   " +
+                "Carbohidratos= " + carbos +
+                ", Grasas= " + fats +
+                ", Proteinas= " + proteins + "   "
+
+                ;
+    }
 }
+
+
 

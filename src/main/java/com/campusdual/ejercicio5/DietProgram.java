@@ -11,33 +11,98 @@ import java.util.List;
 
 public class DietProgram {
 
-    private Diet diet=null;
+    private Diet diet = null;
 
     private List<Food> foodList;
 
-    public DietProgram(){
+    public DietProgram() {
         foodList = new ArrayList<>();
     }
 
-    private Integer getOption(Integer min,Integer max){
+    private Integer getOption(Integer min, Integer max) {
         Integer option = 0;
         Boolean notvalid = true;
-        do{
+        do {
             try {
                 option = Kb.forceNextInt();
-                notvalid = option<min || option>max;
-            }catch (InputMismatchException e){
+                notvalid = option < min || option > max;
+            } catch (InputMismatchException e) {
                 System.out.println("La opción debe ser un número");
                 Kb.nextLine();
             }
-            if(notvalid){
-                System.out.println("Opción no valida, se requiere un número entre "+min+" y "+max);
+            if (notvalid) {
+                System.out.println("Opción no valida, se requiere un número entre " + min + " y " + max);
             }
-        }while(notvalid);
+        } while (notvalid);
         return option;
     }
 
-    public void showMenuProgram(){
+
+    public void showMenuProgram() {
+        System.out.println("########################################################");
+        System.out.println("################# Programa de dietas ###################");
+        System.out.println("########################################################");
+        Integer option;
+        do {
+            System.out.println("Escriba una opción:");
+            System.out.println("===================================");
+            System.out.println("1- Gestión de dietas");
+            System.out.println("2- Gestión de pacientes ");
+            System.out.println("3- Salir del programa");
+            option = getOption(1, 3);
+            switch (option) {
+                case 1:
+                    dietManager();
+                    break;
+                case 2:
+                    customerManager();
+                    break;
+                case 3:
+                    System.out.println("Gracias por usar el programa, hasta pronto :)");
+                    break;
+            }
+        } while (option != 3);
+    }
+
+    private void dietManager() {
+
+        System.out.println("########################################################");
+        System.out.println("################# Gestión de dietas ###################");
+        System.out.println("########################################################");
+        Integer option;
+        do {
+            System.out.println("Escriba una opción:");
+            System.out.println("===================================");
+            System.out.println("1-Agregar nueva dieta");
+            System.out.println("2-Listar dietas");
+            System.out.println("3-Eliminar dieta");
+            System.out.println("4- Salir del programa");
+            option = getOption(1, 4);
+            switch (option) {
+                case 1:
+                    createDiet();
+                    break;
+                case 2:
+                    managerDiets();
+                    break;
+                case 3:
+                    deleteDiet();
+                    break;
+                case 4:
+                    System.out.println("Gracias por usar el programa, hasta pronto :)");
+                    break;
+            }
+        } while (option != 4);
+    }
+
+    private void customerManager() {
+
+        //TODO method
+    }
+
+
+    //!Menu principal anterior
+   /* public void showMenuProgram(){
         System.out.println("########################################################");
         System.out.println("################# Programa de dietas ###################");
         System.out.println("########################################################");
@@ -66,9 +131,9 @@ public class DietProgram {
             }
         }while(option != 4);
     }
-
+*/
     private void addFoodMenu() {
-        if(this.diet==null){
+        if (this.diet == null) {
             System.out.println("Para agregar alimentos hace falta iniciar una dieta");
             return;
         }
@@ -80,8 +145,8 @@ public class DietProgram {
         System.out.println("1-Agregar un nuevo alimento");
         System.out.println("2-Agregar un alimento ya existente");
 
-        Integer option = getOption(1,2);
-        switch (option){
+        Integer option = getOption(1, 2);
+        switch (option) {
             case 1:
                 System.out.println("@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@");
                 System.out.println("Datos de nuevo alimento");
@@ -96,12 +161,12 @@ public class DietProgram {
                 Integer proteins = Kb.forceNextInt();
                 System.out.println("Gramos:");
                 Integer grams = Kb.forceNextInt();
-                Food newFood = new Food(name,carbs,fats,proteins);
-                validateAndAddFoodToDiet(newFood,grams);
+                Food newFood = new Food(name, carbs, fats, proteins);
+                validateAndAddFoodToDiet(newFood, grams);
                 foodList.add(newFood);
                 break;
             case 2:
-                if(foodList.size()==0){
+                if (foodList.size() == 0) {
                     System.out.println("Para agregar un alimento existente, tienen que existir alimentos previos");
                     return;
                 }
@@ -109,36 +174,36 @@ public class DietProgram {
                 System.out.println("Escoja un alimento");
                 System.out.println("@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@");
                 Integer i = 1;
-                for(Food food:foodList){
-                    System.out.println(i+"- "+food.getName());
+                for (Food food : foodList) {
+                    System.out.println(i + "- " + food.getName());
                     i++;
                 }
-                System.out.println(i+"- Cancelar");
-                Integer element = getOption(1,i);
-                if(element==i){
+                System.out.println(i + "- Cancelar");
+                Integer element = getOption(1, i);
+                if (element == i) {
                     System.out.println("Cancelando alimento");
                     return;
                 }
-                Food storedFood = foodList.get(element-1);
-                System.out.println("indique el número de gramos de "+storedFood.getName());
+                Food storedFood = foodList.get(element - 1);
+                System.out.println("indique el número de gramos de " + storedFood.getName());
                 Integer foodGrams = Kb.forceNextInt();
-                validateAndAddFoodToDiet(storedFood,foodGrams);
+                validateAndAddFoodToDiet(storedFood, foodGrams);
                 break;
         }
     }
 
-    private void validateAndAddFoodToDiet(Food food, Integer grams){
-        try{
-            this.diet.addFood(food,grams);
-        }catch (MaxCaloriesReachedException ecal){
+    private void validateAndAddFoodToDiet(Food food, Integer grams) {
+        try {
+            this.diet.addFood(food, grams);
+        } catch (MaxCaloriesReachedException ecal) {
             System.out.println("Se ha alcanzado el máximo valor de calorías permitido");
-        }catch (MaxCarbsReachedException ecar){
+        } catch (MaxCarbsReachedException ecar) {
             System.out.println("Se ha alcanzado el máximo valor de carbohidratos permitido");
-        }catch (MaxFatsReachedException efat){
+        } catch (MaxFatsReachedException efat) {
             System.out.println("Se ha alcanzado el máximo valor de grasas permitido");
-        }catch (MaxProteinsReachedException epro){
+        } catch (MaxProteinsReachedException epro) {
             System.out.println("Se ha alcanzado el máximo valor de proteínas permitido");
-        }catch (Exception e) {
+        } catch (Exception e) {
             throw new RuntimeException(e);
         }
     }
@@ -153,8 +218,8 @@ public class DietProgram {
         System.out.println("2-Dieta por calorías");
         System.out.println("3-Dieta por macronutrientes");
         System.out.println("4-Dieta por datos personales");
-        Integer option = getOption(1,4);
-        switch (option){
+        Integer option = getOption(1, 4);
+        switch (option) {
             case 1:
                 this.diet = new Diet();
                 System.out.println("Se ha creado una dieta sin límites");
@@ -165,7 +230,7 @@ public class DietProgram {
                 System.out.println("@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@");
                 Integer calories = Kb.forceNextInt();
                 this.diet = new Diet(calories);
-                System.out.println("Se ha creado una dieta con "+calories+" calorías máximas");
+                System.out.println("Se ha creado una dieta con " + calories + " calorías máximas");
                 break;
             case 3:
                 System.out.println("@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@");
@@ -177,8 +242,8 @@ public class DietProgram {
                 Integer fats = Kb.forceNextInt();
                 System.out.println("Proteínas:");
                 Integer proteins = Kb.forceNextInt();
-                this.diet = new Diet(fats,carbs,proteins);
-                System.out.println("Se ha creado una dieta con Carbohidratos:"+carbs+", Grasas:"+fats+" ,Proteínas:"+proteins);
+                this.diet = new Diet(fats, carbs, proteins);
+                System.out.println("Se ha creado una dieta con Carbohidratos:" + carbs + ", Grasas:" + fats + " ,Proteínas:" + proteins);
                 break;
             case 4:
                 System.out.println("@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@");
@@ -192,30 +257,30 @@ public class DietProgram {
                 Integer age = Kb.forceNextInt();
                 System.out.println("Mujer u Hombre(m/h):");
                 String sexCharacter = Kb.nextLine();
-                this.diet = new Diet("m".equalsIgnoreCase(sexCharacter),age,height,weight);
-                System.out.println("Se ha creado una dieta de "+this.diet.getMaxCalories()+" calorías máximas");
+                this.diet = new Diet("m".equalsIgnoreCase(sexCharacter), age, height, weight);
+                System.out.println("Se ha creado una dieta de " + this.diet.getMaxCalories() + " calorías máximas");
                 break;
         }
     }
 
     private void showDetailsMenu() {
-        if(this.diet!=null){
+        if (this.diet != null) {
             System.out.println("@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@");
             System.out.println("Detalles de la dieta");
             System.out.println("@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@");
-            if(this.diet.getMaxCalories()!=null){
-                System.out.println("El número máximo de calorías es:"+this.diet.getMaxCalories());
+            if (this.diet.getMaxCalories() != null) {
+                System.out.println("El número máximo de calorías es:" + this.diet.getMaxCalories());
             }
-            if(this.diet.getMaxCarbs() != null || this.diet.getMaxFats() != null || this.diet.getMaxProteins() != null){
-                System.out.println("Los valores máximos de macronutrientes son: Carbohidratos:"+this.diet.getMaxCarbs()+" , Grasas:"+this.diet.getMaxFats()+" , Proteinas:"+this.diet.getMaxProteins());
+            if (this.diet.getMaxCarbs() != null || this.diet.getMaxFats() != null || this.diet.getMaxProteins() != null) {
+                System.out.println("Los valores máximos de macronutrientes son: Carbohidratos:" + this.diet.getMaxCarbs() + " , Grasas:" + this.diet.getMaxFats() + " , Proteinas:" + this.diet.getMaxProteins());
             }
-            System.out.println("Número de alimentos de la dieta:"+this.diet.getFoodNumber());
-            System.out.println("Calorías:"+this.diet.getTotalCalories());
-            System.out.println("Carbohidratos:"+this.diet.getTotalCarbs());
-            System.out.println("Grasas:"+this.diet.getTotalFats());
-            System.out.println("Proteínas:"+this.diet.getTotalProteins());
-            System.out.println("Alimentos de la dieta:"+this.diet.getDietIntakes());
-        }else{
+            System.out.println("Número de alimentos de la dieta:" + this.diet.getFoodNumber());
+            System.out.println("Calorías:" + this.diet.getTotalCalories());
+            System.out.println("Carbohidratos:" + this.diet.getTotalCarbs());
+            System.out.println("Grasas:" + this.diet.getTotalFats());
+            System.out.println("Proteínas:" + this.diet.getTotalProteins());
+            System.out.println("Alimentos de la dieta:" + this.diet.getDietIntakes());
+        } else {
             System.out.println("@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@");
             System.out.println("La dieta no esta iniciada");
             System.out.println("@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@");
